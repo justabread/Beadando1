@@ -4,7 +4,7 @@ package beadando1;
  *
  * @author pappj
  */
-public class Jármű {
+public class Jarmu {
     private String type;
     private String license;
     private String brand;
