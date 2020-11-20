@@ -1,6 +1,6 @@
 package beadando1;
 
-public class Alkalmazott extends BerlesSzervezo {
+public class Alkalmazott extends BerlesSzervezo{
     private final int employeeId;
 
     public Alkalmazott(int employeeId) {
