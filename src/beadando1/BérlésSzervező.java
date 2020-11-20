@@ -6,4 +6,9 @@ package beadando1;
  */
 public class BérlésSzervező {
     protected String password;
+    
+    public void Login()
+    {
+        
+    }
 }
