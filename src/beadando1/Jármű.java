@@ -5,8 +5,8 @@ package beadando1;
  * @author pappj
  */
 public class Jármű {
-    private String Type;
-    private String License;
-    private String Brand;
-    private int Price;
+    private String type;
+    private String license;
+    private String brand;
+    private int price;
 }
