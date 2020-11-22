@@ -1,8 +1,10 @@
-
 package beadando1;
 
 import java.util.List;
 import java.util.Map;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class Osztalykezelo {
     private List<Jarmu> jarmuList;
