@@ -1,0 +1,8 @@
+1;Szekeres Olivér
+2;Lakatos Tamás
+3;Soós Ákos
+4;Nagy Rajmund Levente
+5;Sücs Flóra
+6;Pál Bianka
+7;Nagy Henrik Zoltán
+8;Bács Krisztián
