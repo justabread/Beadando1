@@ -23,7 +23,7 @@ public class Osztalykezelo {
         this.ugyfelList = new ArrayList<>();
     }
     
-      public List<Ugyfel> getUgyfelList()
+    public List<Ugyfel> getUgyfelList()
     {
         return ugyfelList;
     }
