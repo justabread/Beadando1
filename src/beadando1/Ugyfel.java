@@ -3,12 +3,22 @@ package beadando1;
 import java.util.Scanner;
 
 public class Ugyfel {
-    private final String nev;
+    private final String name;
     private final int ugyfelId;
 
-    public Ugyfel(String nev, int ugyfelId) {
-        this.nev = nev;
+    public Ugyfel(int ugyfelId, String name) {
+        this.name = name;
         this.ugyfelId = ugyfelId;
+    }
+    
+    public int getUgyfelId()
+    {
+        return this.ugyfelId;
+    }
+    
+    public String getName()
+    {
+        return this.name;
     }
     
     public void complaint(){
@@ -20,4 +30,9 @@ public class Ugyfel {
     public void editRent(){}
     
     public void searchCar(){}
+    
+    public String ugyfelToString()
+    {
+        return this.ugyfelId + "; " + this.name;
+    }  
 }

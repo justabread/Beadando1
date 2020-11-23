@@ -16,10 +16,17 @@ public class Berles
         this.totalPrice = _totalPrice;
         this.startDate = _startDate;
         this.endDate = _endDate;
-    }
-    
-    public void setVehicle(List<String> _vehicle)
-    {
         vehicle = _vehicle;
-    }
+    }   
+    
+    public String berlesToString()
+    {
+        String berlesStringFirst = this.totalPrice + "; " + this.startDate + "; " + this.endDate; 
+        for(String v : vehicle)
+        {
+            berlesStringFirst += "; " + v;
+        }
+        
+        return berlesStringFirst;
+    }  
 }
