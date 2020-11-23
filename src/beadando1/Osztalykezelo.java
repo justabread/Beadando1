@@ -23,7 +23,7 @@ public class Osztalykezelo {
         this.ugyfelList = new ArrayList<>();
     }
     
-      public List<Ugyfel> getUgyfelList()
+    public List<Ugyfel> getUgyfelList()
     {
         return ugyfelList;
     }
@@ -79,7 +79,7 @@ public class Osztalykezelo {
     public void berlesRead()
     {
         DateTimeFormatter berlesFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        List<String> currentVehicles=new ArrayList<String>();
+        List<String> currentVehicles;
         int totalPrice = 0;
         long berlesDays = 0;
         
@@ -88,22 +88,22 @@ public class Osztalykezelo {
             Scanner berlesReader = new Scanner(berlesFile);
             while(berlesReader.hasNextLine())
             {
+                currentVehicles=new ArrayList<String>();
                 String currentLine = berlesReader.nextLine();
                 String[] lineData = currentLine.split(";");
                 LocalDate startDate = LocalDate.parse(lineData[1], berlesFormat);
                 LocalDate endDate = LocalDate.parse(lineData[2], berlesFormat);
                 
                 for(int i = 3; i < lineData.length; i++)
-                {
-                    System.out.println(lineData[i]);
-                    //currentVehicles.add("pp");
-                    /*for(Jarmu jarmuvek : jarmuList) 
+                {                   
+                    for(Jarmu jarmuvek : jarmuList) 
                     {
                         if(jarmuvek.getLicense().equalsIgnoreCase(lineData[i])) 
                         {
                             totalPrice += jarmuvek.getPrice();
+                            currentVehicles.add(lineData[i]);
                         }
-                    }*/
+                    }
                 }
                 
                 berlesDays = Duration.between(startDate.atStartOfDay(), endDate.atStartOfDay()).toDays();
@@ -111,6 +111,7 @@ public class Osztalykezelo {
                 
                 Berles currentBerles = new Berles(totalPrice, startDate, endDate, currentVehicles);
                 berlesMap.put(Integer.parseInt(lineData[0]), currentBerles);
+                totalPrice = 0;
                 
             }                       
         }catch(FileNotFoundException e)
