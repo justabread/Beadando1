@@ -23,6 +23,7 @@ public class Ugyfel {
     
     public void complaint(){
         Scanner sc = new Scanner(System.in);
+        String complaint = sc.nextLine();
     }
     
     public void newRent(){}

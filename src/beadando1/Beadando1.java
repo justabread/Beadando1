@@ -20,5 +20,9 @@ public class Beadando1 {
         o1.getBerlesMap().entrySet().forEach(currentBerles->{
             System.out.println(currentBerles.getKey() + "; " + currentBerles.getValue().berlesToString());
         });
+        
+        Vezeto v = new Vezeto();
+        //v.addCar();
+        v.removeCar();
     }   
 }
