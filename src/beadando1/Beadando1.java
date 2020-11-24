@@ -30,5 +30,6 @@ public class Beadando1 {
         }
         //v.addEmployee();
         //v.removeEmployee();
+        //v.salary();
     }   
 }

@@ -1,6 +1,8 @@
 package beadando1;
 
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
@@ -59,8 +61,11 @@ public class Vezeto extends BerlesSzervezo {
     }
 
     public void salary() {
-
-        //accountBalance -= 
+        int i = 0;
+        Osztalykezelo o = new Osztalykezelo();
+        o.alkalmazottRead();
+        int db = o.getAlkalmazottList().size();
+        accountBalance -= i*200000;
     }
 
     public void costs() {
@@ -68,7 +73,7 @@ public class Vezeto extends BerlesSzervezo {
     }
 
     public void income() {
-
+        
     }
 
     public void addEmployee() {
