@@ -5,22 +5,28 @@ import java.util.Map;
 import java.util.LinkedHashMap;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Osztalykezelo {
     private List<Jarmu> jarmuList;
     private Map<Integer, Berles> berlesMap;
-    private List<Ugyfel> ugyfelList;      
+    private List<Ugyfel> ugyfelList;  
+    private ArrayList<Alkalmazott> alkalmazottList;
     
     public Osztalykezelo()
     {
         this.jarmuList = new ArrayList<>();
         this.berlesMap = new LinkedHashMap<>();
         this.ugyfelList = new ArrayList<>();
+        this.alkalmazottList = new ArrayList<>();
     }
     
     public List<Ugyfel> getUgyfelList()
@@ -31,6 +37,10 @@ public class Osztalykezelo {
     public List<Jarmu> getJarmuList()
     {
         return jarmuList;
+    }
+
+    public List<Alkalmazott> getAlkalmazottList() {
+        return alkalmazottList;
     }
     
     public Map<Integer, Berles> getBerlesMap()
@@ -118,5 +128,23 @@ public class Osztalykezelo {
         {
             System.out.println("Error: berlesFile.txt not found");
         }   
+    }
+    
+    public void alkalmazottRead() {
+        try{
+            File alkalmazottFile = new File("alkalmazottFile.txt");
+            Scanner sc = new Scanner(alkalmazottFile);
+            while(sc.hasNextLine())
+            {
+                String currentLine = sc.nextLine();
+                String[] lineData = currentLine.split(";");
+                Alkalmazott a = new Alkalmazott(Integer.parseInt(lineData[0]), lineData[1]);
+
+                alkalmazottList.add(a);
+            }
+        }catch(FileNotFoundException e)
+        {
+            System.out.println("Error: alkalmazottFile.txt not found");
+        }
     }
 }
