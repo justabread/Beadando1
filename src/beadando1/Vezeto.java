@@ -19,13 +19,13 @@ public class Vezeto extends BerlesSzervezo {
 
     public void addCar() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("rendszám:");
+        System.out.println("Rendszám:");
         String license = sc.nextLine();
-        System.out.println("gyártó:");
+        System.out.println("Gyártó:");
         String brand = sc.nextLine();
-        System.out.println("típus:");
+        System.out.println("Típus:");
         String type = sc.nextLine();
-        System.out.println("napidíj:");
+        System.out.println("Napidíj:");
         int price = sc.nextInt();
         try (BufferedWriter output = new BufferedWriter(new FileWriter("jarmuFile.txt", true))) {
             output.write(license + ";" + brand + ";" + type + ";" + price + "\n");
@@ -37,7 +37,7 @@ public class Vezeto extends BerlesSzervezo {
 
     public void removeCar() {
         Scanner input = new Scanner(System.in);
-        System.out.println("rendszám:");
+        System.out.println("Rendszám:");
         String license = input.nextLine();
         Osztalykezelo o = new Osztalykezelo();
         o.jarmuRead();
@@ -79,9 +79,9 @@ public class Vezeto extends BerlesSzervezo {
     public void addEmployee() {
         Scanner scan1 = new Scanner(System.in);
         Scanner scan2 = new Scanner(System.in);
-        System.out.println("alkalmazott azonosítója:");
+        System.out.println("Alkalmazott azonosítója:");
         int id = scan1.nextInt();
-        System.out.println("alkalmazott neve:");
+        System.out.println("Alkalmazott neve:");
         String name = scan2.nextLine();
         Osztalykezelo o = new Osztalykezelo();
         o.alkalmazottRead();
