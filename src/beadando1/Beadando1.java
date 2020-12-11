@@ -24,10 +24,10 @@ public class Beadando1 {
         Vezeto v = new Vezeto();
         //v.addCar();
         //v.removeCar();
-        o1.alkalmazottRead();
+        /*o1.alkalmazottRead();
         for(Alkalmazott a : o1.getAlkalmazottList()){
             System.out.println(a.alkalmazottToString());
-        }
+        }*/
         //v.addEmployee();
         //v.removeEmployee();
         //v.salary();

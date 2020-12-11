@@ -5,16 +5,18 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Vezeto extends BerlesSzervezo {
 
-    private int accountBalance = 5000000;
+    private int accountBalance;
 
     public Vezeto() {
         this.password = "vez";
+        accountBalance = 5000000;
     }
 
     public void addCar() {
@@ -25,10 +27,22 @@ public class Vezeto extends BerlesSzervezo {
         String brand = sc.nextLine();
         System.out.println("Típus:");
         String type = sc.nextLine();
-        System.out.println("Napidíj:");
-        int price = sc.nextInt();
+        int price = -1;
+        boolean validEntry;
+        do {
+            try {
+                System.out.println("Napidíj:");
+                Scanner scan = new Scanner(System.in);
+                price = scan.nextInt();
+                validEntry = true;
+            } catch (InputMismatchException e) {
+                validEntry = false;
+                System.out.println("Kérem egész számot üssön be!");
+            }
+        } while (!validEntry);
         try (BufferedWriter output = new BufferedWriter(new FileWriter("jarmuFile.txt", true))) {
-            output.write(license + ";" + brand + ";" + type + ";" + price + "\n");
+            if(price >= 0)
+                output.write(license + ";" + brand + ";" + type + ";" + price + "\n");
         } catch (IOException ex) {
             Logger.getLogger(Vezeto.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -61,15 +75,24 @@ public class Vezeto extends BerlesSzervezo {
     }
 
     public void salary() {
-        int i = 0;
         Osztalykezelo o = new Osztalykezelo();
         o.alkalmazottRead();
         int db = o.getAlkalmazottList().size();
-        accountBalance -= i*200000;
+        if(accountBalance >= db*200000){
+            accountBalance -= db*200000;
+            System.out.println("Sikeres utalás! Jelenlegi egyenlege: " + accountBalance + " Ft.");
+        }
+        else
+            System.out.println("Az utalás sikertelen! Nincs elég pénz a számláján.");
     }
 
     public void costs() {
-        accountBalance -= 500000;
+        if(accountBalance >= 500000){
+            accountBalance -= 500000;
+            System.out.println("Sikeres utalás! Jelenlegi egyenlege: " + accountBalance + " Ft.");
+        }
+        else
+            System.out.println("Az utalás sikertelen! Nincs elég pénz a számláján.");
     }
 
     public void income() {

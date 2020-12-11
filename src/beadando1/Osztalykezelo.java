@@ -19,7 +19,7 @@ public class Osztalykezelo {
     private List<Jarmu> jarmuList;
     private Map<Integer, Berles> berlesMap;
     private List<Ugyfel> ugyfelList;  
-    private ArrayList<Alkalmazott> alkalmazottList;
+    private List<Alkalmazott> alkalmazottList;
     
     public Osztalykezelo()
     {
