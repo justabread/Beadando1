@@ -64,10 +64,10 @@ public class Berles
     
     public String berlesToStringNoPrice()
     {
-        String berlesStringFirst = this.startDate + "; " + this.endDate; 
+        String berlesStringFirst = this.startDate + ";" + this.endDate; 
         for(String v : vehicle)
         {
-            berlesStringFirst += "; " + v;
+            berlesStringFirst += ";" + v;
         }
         
         return berlesStringFirst;

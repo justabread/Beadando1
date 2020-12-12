@@ -147,7 +147,7 @@ public class Ugyfel {
                 
                 o.getBerlesMap().entrySet().forEach(currentBerles->{
                     try {
-                        bw.write(currentBerles.getKey() + "; " + currentBerles.getValue().berlesToStringNoPrice());
+                        bw.write(currentBerles.getKey() + ";" + currentBerles.getValue().berlesToStringNoPrice());
                         bw.newLine(); 
                     } catch (IOException e) {
                         System.out.println("An error occured while writing to file.");
