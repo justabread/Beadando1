@@ -9,7 +9,7 @@ public class Berles
     private int totalPrice;
     private LocalDate startDate;
     private LocalDate endDate;
-    private List<String> vehicle=new ArrayList<String>();
+    private List<String> vehicle=new ArrayList<>();
     
     public Berles(int _totalPrice, LocalDate _startDate, LocalDate _endDate, List<String> _vehicle)
     {
@@ -18,6 +18,22 @@ public class Berles
         this.endDate = _endDate;
         vehicle = _vehicle;
     }   
+
+    public int getTotalPrice() {
+        return totalPrice;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public List<String> getVehicle() {
+        return vehicle;
+    }
     
     public String berlesToString()
     {

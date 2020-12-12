@@ -1,5 +1,7 @@
 package beadando1;
 
+import java.util.Scanner;
+
 public class Beadando1 {
     public static void main(String[] args) {
         Osztalykezelo o1 = new Osztalykezelo();
@@ -21,7 +23,7 @@ public class Beadando1 {
             System.out.println(currentBerles.getKey() + "; " + currentBerles.getValue().berlesToString());
         });
         
-        Vezeto v = new Vezeto();
+        Vezeto v = new Vezeto(o1);
         //v.addCar();
         //v.removeCar();
         /*o1.alkalmazottRead();
@@ -31,7 +33,15 @@ public class Beadando1 {
         //v.addEmployee();
         //v.removeEmployee();
         //v.salary();
+		
+		Scanner in = new Scanner(System.in);
+        System.out.println("Kérem adjon meg egy évet:");      
+        int ev = in.nextInt();
+        System.out.println("Kérem adjon meg egy hónapot:");      
+        int honap = in.nextInt();
         
+        v.income(ev, honap);
         o1.getUgyfelList().get(0).searchCar();
+        
     }   
 }

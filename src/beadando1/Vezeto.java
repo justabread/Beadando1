@@ -1,20 +1,27 @@
 package beadando1;
 
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Vezeto extends BerlesSzervezo {
 
     private int accountBalance;
+    private Osztalykezelo o;
 
-    public Vezeto() {
+    public Vezeto(Osztalykezelo _o) {
         this.password = "vez";
-        accountBalance = 5000000;
+        this.o = _o;
+        accountBalanceRead();
     }
 
     public void addCar() {
@@ -52,7 +59,7 @@ public class Vezeto extends BerlesSzervezo {
         Scanner input = new Scanner(System.in);
         System.out.println("Rendszám:");
         String license = input.nextLine();
-        Osztalykezelo o = new Osztalykezelo();
+        
         o.jarmuRead();
         for (int i = 0; i < o.getJarmuList().size(); i++) {
             if (o.getJarmuList().get(i).getLicense().equals(license)) {
@@ -74,7 +81,6 @@ public class Vezeto extends BerlesSzervezo {
     }
 
     public void salary() {
-        Osztalykezelo o = new Osztalykezelo();
         o.alkalmazottRead();
         int db = o.getAlkalmazottList().size();
         if (accountBalance >= db * 200000) {
@@ -94,12 +100,59 @@ public class Vezeto extends BerlesSzervezo {
         }
     }
 
-    public void income() {
+    public void income(int currentYear,int currentMonth) {
+        int currentMonthPrice = 0;
+        boolean hasFound = false;
+        Scanner in = new Scanner(System.in);
+        
+        for(Map.Entry<Integer, Berles> currentBerles : o.getBerlesMap().entrySet()) {
+            if(currentBerles.getValue().getStartDate().getYear() == currentYear && currentBerles.getValue().getStartDate().getMonthValue() == currentMonth)
+            {
+                currentMonthPrice += currentBerles.getValue().getTotalPrice();
+                hasFound = true;
+            }                
+        }
+        
+        if(!hasFound)
+        {
+            System.out.println("A megadott időpont nem szerepel a tárolt bérlések között.");
+            System.out.println("Kérem adjon meg egy évet:");      
+            int ev = in.nextInt();
+            System.out.println("Kérem adjon meg egy hónapot:");      
+            int honap = in.nextInt();
 
+            income(ev, honap);
+        }
+
+        System.out.println("A számláján " + accountBalance + "ft összeg található.");
+        System.out.println("A megadott hónapban " + currentMonthPrice + "ft bevétel van tárolva. Hozzá kívánja adni a számlájához?(Y/N)");
+        
+        String userInput = in.nextLine();
+        switch(userInput.toLowerCase())
+        {
+            case "y":
+                accountBalance += currentMonthPrice;
+                
+                try {
+                    FileWriter myWriter = new FileWriter("vezetoBalance.txt");
+                    myWriter.write(String.valueOf(accountBalance));
+                    System.out.println("Havi bevétel sikeresen hozzáadva a számlához.");
+                    
+                    myWriter.close();
+                } catch (IOException e) {
+                    System.out.println("An error occurred while writing to vezetoBalance.txt");
+                }
+                break;
+            case "n":
+                System.out.println("Művelet visszavonva.");
+                break;
+            default:
+                System.out.println("A bemenet nem ismerhető fel.");
+                break;
+        }       
     }
 
     public void addEmployee() {
-        Osztalykezelo o = new Osztalykezelo();
         o.alkalmazottRead();
         Scanner scan2 = new Scanner(System.in);
         int id = 1;
@@ -129,7 +182,6 @@ public class Vezeto extends BerlesSzervezo {
             }
         } while (!validEntry);
 
-        Osztalykezelo o = new Osztalykezelo();
         o.alkalmazottRead();
         for (int i = 0; i < o.getAlkalmazottList().size(); i++) {
             if (o.getAlkalmazottList().get(i).getEmployeeId() == eId) {
@@ -148,5 +200,21 @@ public class Vezeto extends BerlesSzervezo {
         } catch (IOException ex) {
             Logger.getLogger(Vezeto.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public void accountBalanceRead()
+    {
+        try{
+            File vezetoFile = new File("vezetoBalance.txt");
+            Scanner vezetoRead = new Scanner(vezetoFile);
+            while(vezetoRead.hasNextLine())
+            {
+                String currentLine = vezetoRead.nextLine();
+                accountBalance = Integer.parseInt(currentLine);
+            }
+        }catch(FileNotFoundException e)
+        {
+            System.out.println("Error: vezetoBalance.txt not found");
+        }    
     }
 }
