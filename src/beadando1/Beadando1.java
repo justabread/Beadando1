@@ -34,12 +34,5 @@ public class Beadando1 {
         //v.removeEmployee();
         //v.salary();
         
-        Scanner in = new Scanner(System.in);
-        System.out.println("Kérem adjon meg egy évet:");      
-        int ev = in.nextInt();
-        System.out.println("Kérem adjon meg egy hónapot:");      
-        int honap = in.nextInt();
-        
-        v.income(ev, honap);
     }   
 }

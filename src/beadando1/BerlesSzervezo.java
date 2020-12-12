@@ -3,8 +3,8 @@ package beadando1;
 public class BerlesSzervezo {
     protected String password;
     
-    public void Login()
+    public boolean login(String pass)
     {
-        
+        return pass.equals(password);
     }
 }
