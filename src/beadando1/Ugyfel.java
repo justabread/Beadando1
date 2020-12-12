@@ -59,9 +59,9 @@ public class Ugyfel {
             System.out.println("Kérem próbálja újra!");
             gyarto = sc.nextLine();
         }
-        for (Jarmu jarmuvek : o.getJarmuList()) {
-            if(gyarto.equals(jarmuvek.getBrand())){
-                System.out.println(jarmuvek.jarmuToString());
+        for (Jarmu j : o.getJarmuList()) {
+            if(gyarto.equals(j.getBrand())){
+                System.out.println("Típus: " + j.getType() + "\tNapidíj: " + j.getPrice() + "\tRendszám: " + j.getLicense());
             }
         }
     }

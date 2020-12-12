@@ -17,5 +17,3 @@ ROR-352;peugeot;207;5500
 TAP-283;renault;laguna;6600
 QLG-895;ford;mondeo;6000
 URC-521;skoda;octavia;4500
-abc-123;opel;astra;4500
-abc-123;opel;astra;4500
