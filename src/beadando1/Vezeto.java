@@ -140,7 +140,7 @@ public class Vezeto extends BerlesSzervezo {
                     
                     myWriter.close();
                 } catch (IOException e) {
-                    System.out.println("An error occurred while writing to vezetoBalance.txt");
+                    System.out.println("Hiba lépett fel a vezetoBalance.txt írása közben");
                 }
                 break;
             case "n":
