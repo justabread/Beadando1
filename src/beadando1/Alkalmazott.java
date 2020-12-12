@@ -9,11 +9,13 @@ import java.util.logging.Logger;
 public class Alkalmazott extends BerlesSzervezo{
     private final int employeeId;
     private final String employeeName;
+    private Osztalykezelo o;
 
-    public Alkalmazott(int employeeId, String name) {
+    public Alkalmazott(int employeeId, String name, Osztalykezelo _o) {
         this.employeeId = employeeId;
         employeeName = name;
         this.password = "alk";
+        this.o = _o;
     }
 
     public int getEmployeeId() {
@@ -22,12 +24,13 @@ public class Alkalmazott extends BerlesSzervezo{
 
     public String getEmployeeName() {
         return employeeName;
+    }      
+    
+    public void listRents(){
+        o.getBerlesMap().entrySet().forEach(currentBerles->{
+            System.out.println(currentBerles.getKey() + "; " + currentBerles.getValue().berlesToString());
+        });
     }
-    
-    
-    public void manageCar(){}
-    
-    public void listRents(){}
     
     public void ujAlkalmazottBejegyzese(){
         try (BufferedWriter output = new BufferedWriter(new FileWriter("alkalmazottFile.txt", true))) {

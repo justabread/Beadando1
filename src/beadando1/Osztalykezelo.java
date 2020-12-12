@@ -60,7 +60,7 @@ public class Osztalykezelo {
                 ugyfelDb++;
                 String currentLine = ugyfelReader.nextLine();
                 String[] lineData = currentLine.split(";");
-                Ugyfel currentUgyfel = new Ugyfel(Integer.parseInt(lineData[0]), lineData[1]);
+                Ugyfel currentUgyfel = new Ugyfel(Integer.parseInt(lineData[0]), lineData[1], this);
                 
                 ugyfelList.add(currentUgyfel);
             }
@@ -142,7 +142,7 @@ public class Osztalykezelo {
             {
                 String currentLine = sc.nextLine();
                 String[] lineData = currentLine.split(";");
-                Alkalmazott a = new Alkalmazott(Integer.parseInt(lineData[0]), lineData[1]);
+                Alkalmazott a = new Alkalmazott(Integer.parseInt(lineData[0]), lineData[1], this);
                 alkDb++;
 
                 alkalmazottList.add(a);

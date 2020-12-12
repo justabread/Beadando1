@@ -16,7 +16,7 @@ public class Beadando1 {
         String valasz = "";
         String jelszo = "";
         Scanner sc = new Scanner(System.in);
-        Alkalmazott a = new Alkalmazott(0, "");
+        Alkalmazott a = new Alkalmazott(0, "", o1);
 
         while (!valasztas.equals("8")) {
             System.out.println("Opciók:");
@@ -128,17 +128,13 @@ public class Beadando1 {
                     if (a.login(jelszo)) {
                         while (!valasz.equals("3")) {
                             System.out.println("Opciók:\n"
-                                    + "1. Autók karbantartása\n"
-                                    + "2. Bérlések kilistázása\n"
-                                    + "3. Kilépés");
+                                    + "1. Bérlések kilistázása\n"
+                                    + "2. Kilépés");
                             valasz = sc.nextLine();
                             switch(valasz){
                                 case "1":
-                                    a.manageCar();
-                                    break;
-                                case "2":
                                     a.listRents();
-                                case "3":
+                                case "2":
                                     System.out.println("Sikeresen kilépett.");
                                     break;
                                 default:
@@ -174,9 +170,7 @@ public class Beadando1 {
             System.out.println(jarmuvek.jarmuToString());
         }
         
-        o1.getBerlesMap().entrySet().forEach(currentBerles->{
-            System.out.println(currentBerles.getKey() + "; " + currentBerles.getValue().berlesToString());
-        });
+       
         
         //v.addCar();
         //v.removeCar();

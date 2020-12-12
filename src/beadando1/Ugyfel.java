@@ -1,5 +1,9 @@
 package beadando1;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -7,10 +11,12 @@ import java.util.Scanner;
 public class Ugyfel {
     private final String name;
     private final int ugyfelId;
+    private Osztalykezelo o;
 
-    public Ugyfel(int ugyfelId, String name) {
+    public Ugyfel(int ugyfelId, String name, Osztalykezelo _o) {
         this.name = name;
         this.ugyfelId = ugyfelId;
+        this.o = _o;
     }
     
     public int getUgyfelId()
@@ -27,7 +33,63 @@ public class Ugyfel {
         System.out.println("Kérjük panaszát írja meg a panasz.kezeles@gmail.com e-mail címre.");
     }
     
-    public void newRent(){}
+    public void newRent(){
+        /*private int totalPrice;
+        private LocalDate startDate;
+        private LocalDate endDate;*/
+        List<String> vehicle=new ArrayList<>();
+        String endString = "";
+                      
+        Scanner in = new Scanner(System.in);
+        System.out.println("Adja meg a hozzáadni kívánt bérlő azonosítóját: ");
+        int userId = 0;    
+            try {
+                userId = Integer.parseInt(in.nextLine());
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        
+        System.out.println("Adja meg a bérlés kezdeti idejét ÉÉÉÉ-HH-NN formátumban: ");
+            String startDate = in.nextLine();
+        
+        System.out.println("Adja meg a bérlés záró idejét ÉÉÉÉ-HH-NN formátumban: ");
+            String endDate = in.nextLine();
+        
+        System.out.println("Adja meg a bérelt autók rendszámát enterrel elválasztva(írjon STOP-ot ha be akarja fejezni a műveletet): ");
+            String rendszam = in.nextLine();
+            if(rendszam.equalsIgnoreCase("stop"))
+            {
+                System.out.println("Művelet megszakítva.");
+            }
+            while(!rendszam.equalsIgnoreCase("stop"))
+            {
+                vehicle.add(rendszam.toUpperCase());
+                rendszam = in.nextLine();
+            }
+            
+        if(!vehicle.isEmpty())
+        {
+            endString += userId + ";";
+            endString += startDate + ";";
+            endString += endDate + ";";
+            
+            for(int i = 0; i < vehicle.size()-1; i++)
+            {
+                endString += vehicle.get(i) + ";";
+            }
+            endString += vehicle.get(vehicle.size()-1);
+            
+            try {
+                FileWriter fw = new FileWriter("berlesFile.txt", true);
+                BufferedWriter bw = new BufferedWriter(fw);
+                bw.write(endString);
+                bw.newLine();
+                bw.close();
+            } catch (IOException e) {
+                System.out.println("An error occured while writing to file.");
+            }                            
+        }
+    }
     
     public void editRent(){}
     

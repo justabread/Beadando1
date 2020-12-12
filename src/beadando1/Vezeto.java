@@ -161,7 +161,7 @@ public class Vezeto extends BerlesSzervezo {
         }
         System.out.println("Alkalmazott neve:");
         String name = scan2.nextLine();
-        Alkalmazott a = new Alkalmazott(id, name);
+        Alkalmazott a = new Alkalmazott(id, name, o);
         a.ujAlkalmazottBejegyzese();
     }
 
