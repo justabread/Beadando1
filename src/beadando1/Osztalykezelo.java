@@ -20,6 +20,7 @@ public class Osztalykezelo {
     private Map<Integer, Berles> berlesMap;
     private List<Ugyfel> ugyfelList;  
     private List<Alkalmazott> alkalmazottList;
+    private int alkDb = 0;
     
     public Osztalykezelo()
     {
@@ -130,6 +131,7 @@ public class Osztalykezelo {
         }   
     }
     
+    
     public void alkalmazottRead() {
         try{
             File alkalmazottFile = new File("alkalmazottFile.txt");
@@ -139,6 +141,7 @@ public class Osztalykezelo {
                 String currentLine = sc.nextLine();
                 String[] lineData = currentLine.split(";");
                 Alkalmazott a = new Alkalmazott(Integer.parseInt(lineData[0]), lineData[1]);
+                alkDb++;
 
                 alkalmazottList.add(a);
             }
@@ -147,4 +150,9 @@ public class Osztalykezelo {
             System.out.println("Error: alkalmazottFile.txt not found");
         }
     }
+
+    public int getAlkDb() {
+        return alkDb;
+    }
+    
 }

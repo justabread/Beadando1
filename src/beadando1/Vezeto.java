@@ -1,8 +1,6 @@
 package beadando1;
 
 import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.InputMismatchException;
@@ -41,8 +39,9 @@ public class Vezeto extends BerlesSzervezo {
             }
         } while (!validEntry);
         try (BufferedWriter output = new BufferedWriter(new FileWriter("jarmuFile.txt", true))) {
-            if(price >= 0)
+            if (price >= 0) {
                 output.write(license + ";" + brand + ";" + type + ";" + price + "\n");
+            }
         } catch (IOException ex) {
             Logger.getLogger(Vezeto.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -78,53 +77,58 @@ public class Vezeto extends BerlesSzervezo {
         Osztalykezelo o = new Osztalykezelo();
         o.alkalmazottRead();
         int db = o.getAlkalmazottList().size();
-        if(accountBalance >= db*200000){
-            accountBalance -= db*200000;
+        if (accountBalance >= db * 200000) {
+            accountBalance -= db * 200000;
             System.out.println("Sikeres utalás! Jelenlegi egyenlege: " + accountBalance + " Ft.");
-        }
-        else
+        } else {
             System.out.println("Az utalás sikertelen! Nincs elég pénz a számláján.");
+        }
     }
 
     public void costs() {
-        if(accountBalance >= 500000){
+        if (accountBalance >= 500000) {
             accountBalance -= 500000;
             System.out.println("Sikeres utalás! Jelenlegi egyenlege: " + accountBalance + " Ft.");
-        }
-        else
+        } else {
             System.out.println("Az utalás sikertelen! Nincs elég pénz a számláján.");
+        }
     }
 
     public void income() {
-        
+
     }
 
     public void addEmployee() {
-        Scanner scan1 = new Scanner(System.in);
-        Scanner scan2 = new Scanner(System.in);
-        System.out.println("Alkalmazott azonosítója:");
-        int id = scan1.nextInt();
-        System.out.println("Alkalmazott neve:");
-        String name = scan2.nextLine();
         Osztalykezelo o = new Osztalykezelo();
         o.alkalmazottRead();
-        boolean foglalt = false;
-        for (Alkalmazott a : o.getAlkalmazottList()) {
-            if (a.getEmployeeId() == id) {
-                System.out.println("Ez azonosító már foglalt.");
-                foglalt = true;
-            }
+        Scanner scan2 = new Scanner(System.in);
+        int id = 1;
+        if(o.getAlkDb() >= 1){
+            id = o.getAlkalmazottList().get(o.getAlkDb()-1).getEmployeeId() + 1;
         }
-        if (!foglalt) {
-            Alkalmazott a = new Alkalmazott(id, name);
-            a.ujAlkalmazottBejegyzese();
-        }
+        System.out.println("Alkalmazott neve:");
+        String name = scan2.nextLine();
+        Alkalmazott a = new Alkalmazott(id, name);
+        a.ujAlkalmazottBejegyzese();
     }
 
     public void removeEmployee() {
         Scanner input1 = new Scanner(System.in);
-        System.out.println("alkalmazott azonosítója:");
-        int eId = input1.nextInt();
+        //System.out.println("alkalmazott azonosítója:");
+        //int eId = input1.nextInt();
+        int eId = 0;
+        boolean validEntry;
+        do {
+            try {
+                System.out.println("Alkalmazott azonosítója:");
+                eId = input1.nextInt();
+                validEntry = true;
+            } catch (InputMismatchException e) {
+                validEntry = false;
+                System.out.println("Kérem egész számot üssön be!");
+            }
+        } while (!validEntry);
+
         Osztalykezelo o = new Osztalykezelo();
         o.alkalmazottRead();
         for (int i = 0; i < o.getAlkalmazottList().size(); i++) {

@@ -22,8 +22,7 @@ public class Ugyfel {
     }
     
     public void complaint(){
-        Scanner sc = new Scanner(System.in);
-        String complaint = sc.nextLine();
+        System.out.println("Kérjük panaszát írja meg a panasz.kezeles@gmail.com e-mail címre.");
     }
     
     public void newRent(){}
