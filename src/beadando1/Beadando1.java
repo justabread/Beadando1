@@ -28,8 +28,10 @@ public class Beadando1 {
         for(Alkalmazott a : o1.getAlkalmazottList()){
             System.out.println(a.alkalmazottToString());
         }*/
-        v.addEmployee();
+        //v.addEmployee();
         //v.removeEmployee();
         //v.salary();
+        
+        o1.getUgyfelList().get(0).searchCar();
     }   
 }
