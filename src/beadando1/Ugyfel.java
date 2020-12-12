@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -38,13 +39,19 @@ public class Ugyfel {
         String endString = "";
                       
         Scanner in = new Scanner(System.in);
-        System.out.println("Adja meg a hozzáadni kívánt bérlő azonosítóját: ");
-        int userId = 0;    
+        int userId = 0;
+        boolean validEntry;
+        do {
             try {
-                userId = Integer.parseInt(in.nextLine());
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
+                System.out.println("Adja meg a hozzáadni kívánt bérlő azonosítóját: ");
+                Scanner sc = new Scanner(System.in);
+                userId = sc.nextInt();
+                validEntry = true;
+            } catch (InputMismatchException e) {
+                validEntry = false;
+                System.out.println("Kérem egész számot üssön be!");
             }
+        } while (!validEntry);
         
         System.out.println("Adja meg a bérlés kezdeti idejét ÉÉÉÉ-HH-NN formátumban: ");
             String startDate = in.nextLine();
@@ -94,14 +101,20 @@ public class Ugyfel {
         List<String> _vehicle=new ArrayList<>();
         Scanner in = new Scanner(System.in);
         
-        System.out.println("Adja meg a szerkeszteni kívánt bérlés ügyfelének azonosítóját: ");      
-        int userId = 0;
         String userInput = "";
+        int userId = 0;
+        boolean validEntry;
+        do {
             try {
-                userId = Integer.parseInt(in.nextLine());
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
+                System.out.println("Adja meg a hozzáadni kívánt bérlő azonosítóját: ");
+                Scanner sc = new Scanner(System.in);
+                userId = sc.nextInt();
+                validEntry = true;
+            } catch (InputMismatchException e) {
+                validEntry = false;
+                System.out.println("Kérem egész számot üssön be!");
             }
+        } while (!validEntry);
         System.out.println("Kívánja a  bérlés kezdeti idejét módosítani?(y-igen)");
         userInput = in.nextLine();
         if(userInput.equalsIgnoreCase("y"))
