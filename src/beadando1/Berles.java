@@ -19,6 +19,22 @@ public class Berles
         vehicle = _vehicle;
     }   
 
+    public void setTotalPrice(int totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
+
+    public void setVehicle(List<String> vehicle) {
+        this.vehicle = vehicle;
+    }
+
     public int getTotalPrice() {
         return totalPrice;
     }
@@ -44,5 +60,16 @@ public class Berles
         }
         
         return berlesStringFirst;
-    }  
+    }
+    
+    public String berlesToStringNoPrice()
+    {
+        String berlesStringFirst = this.startDate + "; " + this.endDate; 
+        for(String v : vehicle)
+        {
+            berlesStringFirst += "; " + v;
+        }
+        
+        return berlesStringFirst;
+    }
 }
