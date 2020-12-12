@@ -4,6 +4,8 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -12,11 +14,22 @@ public class Ugyfel {
     private final String name;
     private final int ugyfelId;
     private Osztalykezelo o;
+    private DateTimeFormatter dateFormatter;
 
     public Ugyfel(int ugyfelId, String name, Osztalykezelo _o) {
         this.name = name;
         this.ugyfelId = ugyfelId;
         this.o = _o;
+        dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    }
+    
+    public boolean isValid(String dateStr) {
+        try {
+            LocalDate.parse(dateStr, this.dateFormatter);
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+        return true;
     }
     
     public int getUgyfelId()
@@ -48,9 +61,28 @@ public class Ugyfel {
         
         System.out.println("Adja meg a bérlés kezdeti idejét ÉÉÉÉ-HH-NN formátumban: ");
             String startDate = in.nextLine();
-        
+        while(!isValid(startDate))
+        {
+            System.out.println("A kezdeti időnek ÉÉÉÉ-HH-NN formátumban kell lennie!");
+            System.out.println("Adja meg a bérlés kezdeti idejét ÉÉÉÉ-HH-NN formátumban: "); 
+                startDate = in.nextLine();
+        }
+            
         System.out.println("Adja meg a bérlés záró idejét ÉÉÉÉ-HH-NN formátumban: ");
-            String endDate = in.nextLine();
+        String endDate = in.nextLine();
+        while(!isValid(endDate))
+        {
+            System.out.println("A záró időnek ÉÉÉÉ-HH-NN formátumban kell lennie!");
+            System.out.println("Adja meg a bérlés záró idejét ÉÉÉÉ-HH-NN formátumban: "); 
+                endDate = in.nextLine();
+        }
+        
+        while(LocalDate.parse(startDate).compareTo(LocalDate.parse(endDate)) > 0)
+        {
+            System.out.println("A záró időnek nagyobbnak kell lennie mint a kezdeti időnek!");
+            System.out.println("Adja meg a bérlés záró idejét ÉÉÉÉ-HH-NN formátumban: ");
+                endDate = in.nextLine();
+        }           
         
         System.out.println("Adja meg a bérelt autók rendszámát enterrel elválasztva(írjon STOP-ot ha be akarja fejezni a műveletet): ");
             String rendszam = in.nextLine();
@@ -93,6 +125,8 @@ public class Ugyfel {
     public void editRent(){
         List<String> _vehicle=new ArrayList<>();
         Scanner in = new Scanner(System.in);
+        String startDate = "";
+        String endDate;
         
         System.out.println("Adja meg a szerkeszteni kívánt bérlés ügyfelének azonosítóját: ");      
         int userId = 0;
@@ -105,19 +139,45 @@ public class Ugyfel {
         System.out.println("Kívánja a  bérlés kezdeti idejét módosítani?(y-igen)");
         userInput = in.nextLine();
         if(userInput.equalsIgnoreCase("y"))
-        {
+        {           
             System.out.println("Adja meg a bérlés kezdeti idejét ÉÉÉÉ-HH-NN formátumban: ");
-            String startDate = in.nextLine();
-            o.getBerlesMap().get(userId).setStartDate(LocalDate.parse(startDate));           
+            startDate = in.nextLine();
+            while(!isValid(startDate))
+            {
+                System.out.println("A kezdeti időnek ÉÉÉÉ-HH-NN formátumban kell lennie!");
+                System.out.println("Adja meg a bérlés kezdeti idejét ÉÉÉÉ-HH-NN formátumban: "); 
+                    startDate = in.nextLine();  
+            }
+            if(isValid(startDate))
+            {
+                o.getBerlesMap().get(userId).setStartDate(LocalDate.parse(startDate));  
+            }
         }
         
         System.out.println("Kívánja a  bérlés záró idejét módosítani?(y-igen)");
         userInput = in.nextLine();
         if(userInput.equalsIgnoreCase("y"))
-        {
+        {                      
             System.out.println("Adja meg a bérlés záró idejét ÉÉÉÉ-HH-NN formátumban: ");
-            String endDate = in.nextLine();
-            o.getBerlesMap().get(userId).setEndDate(LocalDate.parse(endDate)); 
+            endDate = in.nextLine();
+            while(!isValid(endDate))
+            {
+                System.out.println("A záró időnek ÉÉÉÉ-HH-NN formátumban kell lennie!");
+                System.out.println("Adja meg a bérlés záró idejét ÉÉÉÉ-HH-NN formátumban: "); 
+                    endDate = in.nextLine();  
+            }
+            
+            while(LocalDate.parse(startDate).compareTo(LocalDate.parse(endDate)) > 0)
+            {
+                System.out.println("A záró időnek nagyobbnak kell lennie mint a kezdeti időnek!");
+                System.out.println("Adja meg a bérlés záró idejét ÉÉÉÉ-HH-NN formátumban: ");
+                    endDate = in.nextLine();
+            }
+            
+            if(isValid(endDate))
+            {
+                o.getBerlesMap().get(userId).setEndDate(LocalDate.parse(endDate));  
+            } 
         }
         
         System.out.println("Kívánja a bérelt autók rendszámainak listáját módosítani?(y-igen)");
@@ -135,33 +195,33 @@ public class Ugyfel {
                 _vehicle.add(rendszam.toUpperCase());
                 rendszam = in.nextLine();
             }
-        }
-        
-        if(!_vehicle.isEmpty())
-        {
-            o.getBerlesMap().get(userId).setVehicle(_vehicle);
             
-            try {
-                FileWriter fw = new FileWriter("berlesFile.txt", false);
-                BufferedWriter bw = new BufferedWriter(fw);
-                
-                o.getBerlesMap().entrySet().forEach(currentBerles->{
-                    try {
-                        bw.write(currentBerles.getKey() + ";" + currentBerles.getValue().berlesToStringNoPrice());
-                        bw.newLine(); 
-                    } catch (IOException e) {
-                        System.out.println("An error occured while writing to file.");
-                    }
-                                     
-                });                                                                                      
-                bw.close();
-            } catch (IOException e) {
-                System.out.println("An error occured while writing to file.");
-            }                            
-        }else
-        {
-            System.out.println("Üres autólistát adott meg!");
-        }
+            if(!_vehicle.isEmpty())
+            {
+                o.getBerlesMap().get(userId).setVehicle(_vehicle);
+
+                try {
+                    FileWriter fw = new FileWriter("berlesFile.txt", false);
+                    BufferedWriter bw = new BufferedWriter(fw);
+
+                    o.getBerlesMap().entrySet().forEach(currentBerles->{
+                        try {
+                            bw.write(currentBerles.getKey() + ";" + currentBerles.getValue().berlesToStringNoPrice());
+                            bw.newLine(); 
+                        } catch (IOException e) {
+                            System.out.println("An error occured while writing to file.");
+                        }
+
+                    });                                                                                      
+                    bw.close();
+                } catch (IOException e) {
+                    System.out.println("An error occured while writing to file.");
+                }                            
+            }else
+            {
+                System.out.println("Üres autólistát adott meg!");
+            }
+        }             
     }
     
     public void searchCar() {
