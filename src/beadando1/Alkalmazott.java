@@ -27,8 +27,6 @@ public class Alkalmazott extends BerlesSzervezo{
     
     public void manageCar(){}
     
-    public void contact(){}
-    
     public void listRents(){}
     
     public void ujAlkalmazottBejegyzese(){

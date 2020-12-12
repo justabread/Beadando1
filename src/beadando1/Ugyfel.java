@@ -66,6 +66,12 @@ public class Ugyfel {
         }
     }
     
+    public void contact(){
+        System.out.println("Telefonszám: +36 30 8888888\n"
+                + "E-mail cím: auto.info@gmail.com\n"
+                + "Cím: 8200. Veszprém, Katona utca 22.");
+    }
+    
     public String ugyfelToString()
     {
         return this.ugyfelId + "; " + this.name;

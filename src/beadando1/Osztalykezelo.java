@@ -21,6 +21,7 @@ public class Osztalykezelo {
     private List<Ugyfel> ugyfelList;  
     private List<Alkalmazott> alkalmazottList;
     private int alkDb = 0;
+    private int ugyfelDb = 0;
     
     public Osztalykezelo()
     {
@@ -56,6 +57,7 @@ public class Osztalykezelo {
             Scanner ugyfelReader = new Scanner(ugyfelFile);
             while(ugyfelReader.hasNextLine())
             {
+                ugyfelDb++;
                 String currentLine = ugyfelReader.nextLine();
                 String[] lineData = currentLine.split(";");
                 Ugyfel currentUgyfel = new Ugyfel(Integer.parseInt(lineData[0]), lineData[1]);
@@ -153,6 +155,10 @@ public class Osztalykezelo {
 
     public int getAlkDb() {
         return alkDb;
+    }
+
+    public int getUgyfelDb() {
+        return ugyfelDb;
     }
     
 }
