@@ -123,7 +123,8 @@ public class Ugyfel {
                 bw.close();
             } catch (IOException e) {
                 System.out.println("An error occured while writing to file.");
-            }                            
+            }
+            System.out.println("Művelet sikeres.");
         }
         
         o.berlesRead();
@@ -234,7 +235,8 @@ public class Ugyfel {
             {
                 System.out.println("Üres autólistát adott meg!");
             }
-        }             
+        }
+        System.out.println("Művelet sikeres.");       
     }
     
     public void searchCar() {
