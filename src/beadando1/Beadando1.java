@@ -126,7 +126,7 @@ public class Beadando1 {
                     System.out.println("Kérem adja meg a jelszavát!");
                     jelszo = sc.nextLine();
                     if (a.login(jelszo)) {
-                        while (!valasz.equals("3")) {
+                        while (!valasz.equals("2")) {
                             System.out.println("Opciók:\n"
                                     + "1. Bérlések kilistázása\n"
                                     + "2. Kilépés");
