@@ -91,6 +91,8 @@ public class Ugyfel {
                 endDate = in.nextLine();
         }           
         
+        searchCar();
+        
         System.out.println("Adja meg a bérelt autók rendszámát enterrel elválasztva(írjon STOP-ot ha be akarja fejezni a műveletet): ");
             String rendszam = in.nextLine();
             if(rendszam.equalsIgnoreCase("stop"))
