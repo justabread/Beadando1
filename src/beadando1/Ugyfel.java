@@ -242,7 +242,7 @@ public class Ugyfel {
     public void searchCar() {
         Osztalykezelo o = new Osztalykezelo();
         o.jarmuRead();
-        System.out.println("Gyártók:\n");
+        System.out.println("Gyártók:");
         List<String> gyartoLista = new ArrayList<>();
         gyartoLista.add(o.getJarmuList().get(0).getBrand());
         for (Jarmu jarmuvek : o.getJarmuList()) {
