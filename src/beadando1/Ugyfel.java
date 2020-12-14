@@ -183,7 +183,7 @@ public class Ugyfel {
                     endDate = in.nextLine();  
             }
             
-            while(LocalDate.parse(startDate).compareTo(LocalDate.parse(endDate)) > 0)
+            while(o.getBerlesMap().get(userId).getStartDate().compareTo(LocalDate.parse(endDate)) > 0)
             {
                 System.out.println("A záró időnek nagyobbnak kell lennie mint a kezdeti időnek!");
                 System.out.println("Adja meg a bérlés záró idejét ÉÉÉÉ-HH-NN formátumban: ");
@@ -214,31 +214,30 @@ public class Ugyfel {
             
             if(!_vehicle.isEmpty())
             {
-                o.getBerlesMap().get(userId).setVehicle(_vehicle);
-
-                try {
-                    FileWriter fw = new FileWriter("berlesFile.txt", false);
-                    BufferedWriter bw = new BufferedWriter(fw);
-
-                    o.getBerlesMap().entrySet().forEach(currentBerles->{
-                        try {
-                            bw.write(currentBerles.getKey() + ";" + currentBerles.getValue().berlesToStringNoPrice());
-                            bw.newLine(); 
-                        } catch (IOException e) {
-                            System.out.println("An error occured while writing to file.");
-                        }
-
-                    });                                                                                      
-                    bw.close();
-                } catch (IOException e) {
-                    System.out.println("An error occured while writing to file.");
-                }                            
+                o.getBerlesMap().get(userId).setVehicle(_vehicle);                          
             }else
             {
                 System.out.println("Üres autólistát adott meg!");
             }
         }
-        System.out.println("Művelet sikeres.");       
+        System.out.println("Művelet sikeres."); 
+        try {
+            FileWriter fw = new FileWriter("berlesFile.txt", false);
+            BufferedWriter bw = new BufferedWriter(fw);
+
+            o.getBerlesMap().entrySet().forEach(currentBerles->{
+                try {
+                    bw.write(currentBerles.getKey() + ";" + currentBerles.getValue().berlesToStringNoPrice());
+                    bw.newLine(); 
+                } catch (IOException e) {
+                    System.out.println("An error occured while writing to file.");
+                }
+
+            });                                                                                  
+            bw.close();
+        } catch (IOException e) {
+            System.out.println("An error occured while writing to file.");
+        }                 
     }
     
     public void searchCar() {
