@@ -55,7 +55,7 @@ public class Beadando1 {
                                     + "4. Alkalmazottak kifizetése\n"
                                     + "5. Bevételek kezelése\n"
                                     + "6. Új alkalmazott felvétele\n"
-                                    + "7. Alkalmazott elocsátása\n"
+                                    + "7. Alkalmazott elbocsátása\n"
                                     + "8. Visszalépés a főmenübe");
                             valasz = sc.nextLine();
                             switch (valasz) {
@@ -160,35 +160,5 @@ public class Beadando1 {
             }
         }
 
-        /*for(Ugyfel ugyfelek : o1.getUgyfelList())
-        {
-            System.out.println(ugyfelek.ugyfelToString());
-        }
-        
-        for(Jarmu jarmuvek : o1.getJarmuList())
-        {
-            System.out.println(jarmuvek.jarmuToString());
-        }
-        
-       
-        
-        //v.addCar();
-        //v.removeCar();
-        o1.alkalmazottRead();
-        for(Alkalmazott a : o1.getAlkalmazottList()){
-            System.out.println(a.alkalmazottToString());
-        }
-        //v.addEmployee();
-        //v.removeEmployee();
-        //v.salary();
-		
-		Scanner in = new Scanner(System.in);
-        System.out.println("Kérem adjon meg egy évet:");      
-        int ev = in.nextInt();
-        System.out.println("Kérem adjon meg egy hónapot:");      
-        int honap = in.nextInt();
-        
-        v.income(ev, honap);
-        o1.getUgyfelList().get(0).searchCar();*/
     }
 }
